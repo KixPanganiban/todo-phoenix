@@ -8,6 +8,7 @@ use Mix.Config
 # with brunch.io to recompile .js and .css sources.
 config :todo_phoenix, TodoPhoenix.Endpoint,
   http: [port: 4000],
+  url: [host: "localhost", port: 4000],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
@@ -36,8 +37,8 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :todo_phoenix, TodoPhoenix.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "phoenix",
+  password: "password",
   database: "todo_phoenix_dev",
   hostname: "localhost",
   pool_size: 10

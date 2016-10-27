@@ -15,4 +15,4 @@ config :todo_phoenix, TodoPhoenix.Endpoint,
 config :todo_phoenix, TodoPhoenix.Repo,
   adapter: Ecto.Adapters.Postgres,
   url: {:system, "DATABASE_URL"},
-  pool_size: 20
+  pool_size: 10

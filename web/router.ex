@@ -11,6 +11,7 @@ defmodule TodoPhoenix.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :cors
   end
 
   scope "/", TodoPhoenix do
@@ -19,8 +20,19 @@ defmodule TodoPhoenix.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", TodoPhoenix do
-  #   pipe_through :api
-  # end
+  scope "/api", TodoPhoenix do
+    pipe_through :api
+
+    resources "/todo", TodoController
+    delete "/todo", TodoController, :delete
+    options "/todo/:id", TodoController, :options
+    options "/todo", TodoController, :options
+  end
+
+  def cors(conn, _opts) do
+    conn
+    |> put_resp_header("Access-Control-Allow-Origin", "*")
+    |> put_resp_header("Access-Control-Allow-Methods", "GET,PATCH,POST,DELETE,OPTIONS")
+    |> put_resp_header("Access-Control-Allow-Headers", "Content-Type")
+  end
 end
